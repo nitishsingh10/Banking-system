@@ -8,9 +8,10 @@ const app = express()
 
 app.use(express.json())
 
-connectDB()
+connectDB();
 
 const authRoute = require('./routes/auth.routes');
+const walletRoute = require('./routes/wallet.routes')
 
 app.listen(PORT,()=>{
   console.log(`server is running on http://localhost:${PORT}`)
@@ -21,4 +22,5 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/auth',authRoute);
+app.use('/api/wallet',walletRoute);
 

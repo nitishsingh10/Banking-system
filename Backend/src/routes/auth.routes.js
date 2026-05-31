@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const User = require('../models/user.model')
+const Wallet = require('../models/wallet.model')
 const bcrypt = require('bcrypt');
 
 
@@ -15,16 +16,34 @@ router.post('/signup', async (req, res) => {
         if(!name || !email || !password || !phone || !address){
             return res.json({message : "all fields are required"})
         }
+        
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "User already exists" });
+        }
 
         const user = new User({
             name,
             email,
-            password : await bcrypt.hash(password,10),
+            password : await bcrypt.hash(password,10), // hashing the password using bcrypt with salt rounds of 10
+            wallet: null, // wallet will be created after the user is created
             phone,
             address
         });
 
         await user.save();
+
+        // creating wallet for the user
+        const wallet = new Wallet({
+            userId: user._id,
+            balance: 0,
+            transactions: []
+        });
+
+        await wallet.save();
+        user.wallet = wallet._id; // linking wallet with user
+        await user.save();
+
         res.status(201).json({ message: "User created successfully" });
 
     } catch (err) {
@@ -40,19 +59,19 @@ router.post('/login', async (req,res)=>{
         const {email,password} = req.body;
 
         if(!email || !password){
-            return res.json({message:"all fields are required"})
+            return res.status(400).json({message:"all fields are required"})
         }
 
         // find the user by mail.
         const user = await User.findOne({email}).select("+password"); // we have select:false, so password would not be fetched by default
 
         if(!user){
-            return res.json({message:"user not found"})
+            return res.status(404).json({message:"user not found"})
         }
 
         const isMatch = await bcrypt.compare(password,user.password); // bcrypt to compare the hashed password
         if(!isMatch){
-            return res.json({message:"invalid credentials"})
+            return res.status(401).json({message:"invalid credentials"})
         }
 
         // if login successfull return userdata
