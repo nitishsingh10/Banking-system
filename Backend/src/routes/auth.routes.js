@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require('../models/user.model')
 const Wallet = require('../models/wallet.model')
 const bcrypt = require('bcrypt');
-const verify = require('../middleware/auth.middleware')
 const jwt = require('jsonwebtoken');
 
 
@@ -72,7 +71,7 @@ router.post('/signup', async (req, res) => {
 })
 
 // login route
-router.post('/login',verify, async (req,res)=>{
+router.post('/login', async (req,res)=>{
 
     try{
         // email and pass, if anything of two missing return
@@ -94,14 +93,24 @@ router.post('/login',verify, async (req,res)=>{
             return res.status(401).json({message:"invalid credentials"})
         }
 
+        const token = jwt.sign({
+                id: user._id, // create token after user creation
+                name: user.name,
+                email: user.email
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' });
+
         // if login successfull return userdata
-        res.json({message:"login successful",
-            user:{
-                id:user._id,
-                name:user.name,
-                email:user.email,
-                phone:user.phone,
-                address:user.address
+        res.json({
+            message: "login successful",
+            token, // send token with the response
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                address: user.address
             }
         })
     }
