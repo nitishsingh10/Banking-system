@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const verify = require('../middleware/auth.middleware');
-const {balance} = require('../controllers/wallet.controller')
+const {balance,topup} = require('../controllers/wallet.controller')
 
-// Get wallet balance for the logged-in user
 
-router.get('/balance', verify, balance);
+router.get('/balance', verify, balance); // Get wallet balance for the logged-in user
+router.post('/topup', verify, topup); // topup the wallet
 
 module.exports = router;
