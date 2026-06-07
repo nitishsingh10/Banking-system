@@ -2,6 +2,9 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const Wallet = require('../models/wallet.model')
 const bcrypt = require('bcrypt');
+const {sendOTPEmail,generateOTP} = require('../services/authMail.services');
+
+
 
 const register =  async (req, res) => {
 
@@ -18,6 +21,14 @@ const register =  async (req, res) => {
         if (existingUser) {
             return res.status(400).json({ message: "User already exists" });
         }
+
+        const otp = generateOTP(); // generate the otp
+
+        sendOTPEmail(email,otp); // otp sent to the mail
+        
+        const verified = await verifyOtp(otp);
+        // a step shall be added to verify the otp : if otp matches create the user else, a fallback to handle incorrect otp
+
 
         const user = new User({
             name,
