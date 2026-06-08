@@ -28,12 +28,29 @@ const User = new Schema({
     wallet : {
         type:Schema.Types.ObjectId,
         ref: 'Wallet',
-        default:0
+        default : null
     },
     address:{ // will be changed to object reference in future
         type:String,
         required:true
+    },
+    // two fields required for otp verification
+
+    isVerified:{
+        type:Boolean, 
+        default:false, // by default w/o verification it should be false, after verification attach the wallet and change to true
+        required:true 
+    },
+    otp:{
+        type:String,
+        default:null
+    },
+    otpCreatedAt: {
+        type: Date,
+        default: Date.now,
+        index: { expires: '10m' } // Automatically deletes the user document after 10 minutes if not verified
     }
-},{timestamp:true});
+
+},{timestamps:true});
 
 module.exports = mongoose.model('User',User);
