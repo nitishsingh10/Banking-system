@@ -2,12 +2,7 @@
 
  const authMiddleware = (req,res,next)=>{
 
-    const Auth = req.header('Authorization');
-    
-    if (!Auth || !Auth.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'Unauthorized Access' });
-    }
-    const token = Auth.split(" ")[1];
+    const token = req.cookies.token;
 
     if(!token){
         return res.status(401).json({ message: 'Invalid user' });
