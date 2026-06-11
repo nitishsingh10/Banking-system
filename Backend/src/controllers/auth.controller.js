@@ -29,7 +29,7 @@ const register =  async (req, res) => {
         } catch(err){
             return res.status(500).json({message: 'Failed to send the otp ' + err.message});
         }
-        
+
         const user = new User({
             name,
             email,
@@ -78,7 +78,7 @@ const register =  async (req, res) => {
 
 const verifyOtp = async (req,res) => {
 
-    try {
+    try { 
         
         const {otp,email}= req.body; // email and otp from the body to verify the user
     
@@ -112,7 +112,8 @@ const verifyOtp = async (req,res) => {
         }
     
         // check for the otp if it is correct or not
-        const isOtpValid = bcrypt.compare(otp, user.otp);
+        console.log(user.otp);
+        const isOtpValid = await bcrypt.compare(otp, user.otp);
             
         if (!isOtpValid) {
             return res.status(401).json({ message: 'Invalid OTP' });
