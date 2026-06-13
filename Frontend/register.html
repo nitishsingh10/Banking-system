@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create your GBI Account</h1>
+
+    <p>Enter the following details</p>
+    <div id="registerForm">
+        <div>
+            <label for="name">Full Name</label><br>
+            <input type="text" id="name" placeholder="your name" required>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email</label><br>
+            <input type="email" id="email" placeholder="xyz@gmail.com" required>
+        </div>
+        <br>
+        <div>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" placeholder="Min 8 characters" required>
+        </div>
+        <br>
+        <div>
+            <label for="phone">Phone</label><br>
+            <input type="text" id="phone" placeholder="9876543210" required>
+        </div>
+        <br>
+        <div>
+            <label for="address">Address</label><br>
+            <input type="text" id="address" placeholder="ex : yello, whitefield" required>
+        </div>
+        <br>
+ 
+        <p id="errorMsg" style="display:none; color:red;"></p>
+ 
+        <button id="registerBtn">Register</button>
+    </div>
+    <br>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/pages/register.js"></script>
+</body>
+</html>

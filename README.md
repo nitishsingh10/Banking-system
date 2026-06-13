@@ -15,7 +15,7 @@ A full-stack digital banking application with user authentication, OTP-based ver
 
 **Frontend**
 - Plain HTML, CSS, JavaScript
-
+- Central API method
 ---
 
 ## Project Structure
@@ -72,6 +72,15 @@ Banking-system/
 │       ├── wallet.js       # getBalance, topup
 │       ├── guard.js        # redirects to /login if not authenticated
 │       └── utils.js        # formatCurrency, showError, showSuccess
+│       │ 
+│       │
+│       └── pages/      # JS logic of all the pages
+│           ├── dashboard.js
+│           ├── login.js
+│           ├── register.js
+│           ├── verify-otp.js
+│           ├── sendMoney.js
+│           └── wallet-page.js
 │
 ├── .env
 ├── .env.example

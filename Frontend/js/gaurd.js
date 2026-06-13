@@ -1,0 +1,1 @@
+// this file will contain function to verify the user on every protected page

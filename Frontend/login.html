@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login to your account</h1>
+    <p>Enter the registered details</p>
+    <div id="loginForm">
+        <div>
+            <label for="email">Enter your email</label><br>
+            <input type="email" id="email" placeholder="registered email">
+        </div>
+        <br>
+        <div>
+            <label for="password">Enter your password</label><br>
+            <input type="password" id="password" placeholder="your password">
+        </div>
+        <br>
+        <p id="errorMsg" style="color: red; display: none;"></p>
+
+        <button id="loginBtn">Login</button>
+    </div>
+    <br>
+    <p>Doesn't have an account? <a href="register.html">Create Now</a></p>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/pages/login.js"></script>
+</body>
+</html>
