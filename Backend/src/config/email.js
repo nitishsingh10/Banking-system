@@ -20,7 +20,7 @@ const sendEmail = async ({ to, subject, html }) => {
         },
         body: JSON.stringify({
             sender: { name: 'GBI Banking',  // display name of the mail
-                      email: 'noreply@nitishsingh.in' }, // email, set in the brevo's sender list
+                      email: process.env.EMAIL }, // email, set in the brevo's sender list
             to: [{ email: to }],
             subject,
             htmlContent: html

@@ -10,7 +10,7 @@ A full-stack digital banking application with user authentication, OTP-based ver
 - Node.js + Express.js
 - MongoDB + Mongoose
 - JWT (stored as httpOnly cookie)
-- Nodemailer (OTP + alert emails)
+- Brevo (OTP + alert emails)
 - bcrypt (password + OTP hashing)
 
 **Frontend**
@@ -27,7 +27,7 @@ Banking-system/
 │   └── src/
 │       ├── config/
 │       │   ├── db.js                   # MongoDB connection
-│       │   └── email.js                # Nodemailer transporter
+│       │   └── email.js                # Brevo configuration
 │       │
 │       ├── controllers/
 │       │   ├── auth.controller.js      # register, login, logout, verifyOtp
@@ -97,7 +97,7 @@ Banking-system/
 
 - Node.js v18+
 - MongoDB (local or Atlas)
-- A Gmail account with an App Password for Nodemailer
+- Brevo credenitials : api key
 
 ### Installation
 
@@ -118,11 +118,11 @@ Copy `.env.example` to `.env` and fill in your values:
 PORT=3000
 JWT_SECRET=your_jwt_secret_key
 MONGODB_URI=your_mongodb_connection_string
-EMAIL=your_gmail_address
-APP_PASS=your_gmail_app_password
+CLIENT_ORIGIN=frontend_url
+BREVO_API_KEY=your_brevo_api_key
 ```
 
-> To get a Gmail App Password: Google Account → Security → 2-Step Verification → App Passwords
+> to setup brevo credentials : www.brevo.com
 
 ### Running the Server
 
@@ -199,8 +199,8 @@ Unverified users are automatically deleted from the database after 10 minutes vi
 | `PORT` | Port the server runs on (default: 3000) |
 | `JWT_SECRET` | Secret key for signing JWTs |
 | `MONGODB_URI` | MongoDB connection string |
-| `EMAIL` | Gmail address used to send emails |
-| `APP_PASS` | Gmail App Password for Nodemailer |
+| `CLIENT_ORIGIN` | Frontend URL |
+| `BREVO_API_KEY` | Brevo API Key |
 
 ---
 
