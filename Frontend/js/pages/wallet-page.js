@@ -65,6 +65,9 @@ document.getElementById('addFundsBtn').addEventListener('click',async ()=>{
         return alert('please enter the amount first !');
     }
 
+    if(amount>100000){
+        return alert('Dont be greedy 🙈');
+    }
     const res = await depositMoney(amount);
 
     if(res && res.success){

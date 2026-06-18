@@ -46,7 +46,7 @@ const deposit = async (req, res) => {
 
         const txnRef = 'TXN'+amount+'DEP'+Date.now();
 
-        const time = new Date().toLocaleString();
+        const time = new Date().toLocaleString('en-IN');
 
         const depositTransaction = new transaction({
                     walletId : null, // to be set after depositiing successfully

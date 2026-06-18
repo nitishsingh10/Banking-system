@@ -81,7 +81,7 @@ const sendMoney = async (req, res) => {
             senderId,
             receiverId,
             type : 'debit',
-            date : new Date()
+            date : new Date('en-IN')
         })
 
         const receiveTransaction = new transaction({
@@ -92,7 +92,7 @@ const sendMoney = async (req, res) => {
             senderId,
             receiverId,
             type : 'credit',
-            date : new Date()
+            date : new Date('en-IN')
         })
 
         await sendTransaction.save({session});
@@ -118,14 +118,16 @@ const sendMoney = async (req, res) => {
             to: req.user.email,
             subject: "Money Sent",
             amount: amount,
-            type: 'debit'
+            type: 'debit',
+            time: new Date().toLocaleString('en-IN')
         });
 
         transactionMail({
             to: receiverEmail,
             subject: "Money Received",
             amount: amount,
-            type: 'credit'
+            type: 'credit',
+            time: new Date().toLocaleString('en-IN')
         });
 
         return res.status(200).json({

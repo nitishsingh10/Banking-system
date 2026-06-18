@@ -31,12 +31,12 @@ const history = async () => {
 history(); // autopopulate the history of transactions in main dashboard
 
 function showTransactionHistory(transaction) {
+    const transactionList = document.getElementById('transactionList');
 
     if (!transaction.transactions || transaction.transactions.length === 0) {
         transactionList.innerHTML = '<h3>No transactions yet !</h3>';
         return;
     }
-    const transactionList = document.getElementById('transactionList');
 
     transactionList.innerHTML = '';
     transaction = transaction.transactions.toReversed();

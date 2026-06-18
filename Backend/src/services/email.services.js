@@ -1,6 +1,6 @@
 const sendMail = require('../config/email');
 
-const transactionMail = async ({to,subject,amount,type})=>{
+const transactionMail = async ({to,subject,amount,type,time})=>{
 
     const mailOptions = {
         to: to,
@@ -11,6 +11,9 @@ const transactionMail = async ({to,subject,amount,type})=>{
                 <p>A <strong>${type}</strong> transaction has been processed on your account.</p>
                 <div style="font-size: 18px; margin: 20px 0; padding: 10px; background-color: #f9f9f9; border-left: 5px solid ${type === 'debit' ? '#c61616' : '#28a745'};">
                     Amount: <strong>${amount}</strong>
+                </div>
+                <div>
+                    Time : ${time}
                 </div>
                 <p>Thank you for using GBI.</p>
             </div>

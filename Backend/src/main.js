@@ -26,7 +26,7 @@ const transactionRoute = require('./routes/transaction.routes')
 // render internally uses reverse proxy due to which we can not get the ip address directly
 // we get the renders internall proxy instead of user's ip 
 
-app.set('trust proxy', 1); // it sets that the ip adress passed by the user should trusted : testing it now
+app.set('trust proxy', 1); // it tells the express to get the first ip that is the raw user ip instead of proxies
 app.use('/api/auth',authRoute);
 app.use('/api/wallet',walletRoute);
 app.use('/api/transaction',transactionRoute);

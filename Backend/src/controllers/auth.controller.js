@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const {sendOTPEmail,generateOTP} = require('../services/authMail.services');
 const {loginMail} = require('../services/email.services');
 const uaParser = require('ua-parser-js');
+const { get } = require('../routes/transaction.routes');
 
 
 const register =  async (req, res) => {
@@ -195,12 +196,22 @@ const login =  async (req,res)=>{
         const userAgent = req.headers['user-agent'];
         const device = (new uaParser(userAgent)).getResult();
 
+        // using IP adress to get the location : rate limit is there on free tier, hence rate limiter has to be applied
+        const getLocation = async (ip) => {
+            const res = await fetch(`http://ip-api.com/json/${ip}`);
+            const data = await res.json();
+            return `${data.city}, ${data.regionName}, ${data.country}`;
+            
+        };
+
+        console.log(getLocation);
+
         const systemDetails = {
             browser: device.browser,
             os: device.os,
             device: device,
-            ip : req.ip,
-            time : new Date().toLocaleString()
+            location : getLocation(req.ip),
+            time : new Date().toLocaleString('en-IN') // Indian specific time
         }
 
         loginMail(user.email,systemDetails);
