@@ -23,6 +23,10 @@ const authRoute = require('./routes/auth.routes');
 const walletRoute = require('./routes/wallet.routes')
 const transactionRoute = require('./routes/transaction.routes')
 
+// render internally uses reverse proxy due to which we can not get the ip address directly
+// we get the renders internall proxy instead of user's ip 
+
+app.set('trust proxy', 1); // it sets that the ip adress passed by the user should trusted : testing it now
 app.use('/api/auth',authRoute);
 app.use('/api/wallet',walletRoute);
 app.use('/api/transaction',transactionRoute);
