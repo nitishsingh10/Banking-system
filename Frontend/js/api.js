@@ -1,6 +1,4 @@
-// const BASE_URL = 'https://gbi-0y3t.onrender.com/api' // production
-
-const BASE_URL = 'http://localhost:3000/api' // development
+const BASE_URL = 'https://gbi-0y3t.onrender.com/api'
 
 // central API request : all the request will be sent through this API
 
