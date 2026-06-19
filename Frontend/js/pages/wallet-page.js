@@ -1,6 +1,6 @@
 const email = sessionStorage.getItem('userEmail');
 
-document.getElementById('userEmail').textContent = 'user' + email;
+document.getElementById('userEmail').textContent = 'User : ' + email;
 
 const balanceField = document.getElementById('currentBalance');
 const history = document.getElementById('transactionHistory');
