@@ -1,29 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify OTP</title>
-    <script src="./js/guard.js"></script>
-</head>
-<body>
-    <h1>Verify Your Account</h1>
-    <p>Please enter the otp sent to your registered email</p>
-    <p>Otp is valid for only 10 minutes</p>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f8fc;
+        color: #002970;
+        text-align: center;
+        margin: 0;
+        background: linear-gradient(to right,white,rgb(0, 145, 255));
+    }
 
-    <div id="otpForm">
-        <label for="otp">Enter the Otp Correctly</label><br>
-        <input type="text" id="otpField" placeholder="OTP">
-        <br>
-        <p id="errorMsg" style="color: red; display: none;"></p>
-        <br>
-        <button id="submitOtp">Verify</button>
-    </div>
-    <br>
-    <p>The otp sent to your email is valid only for 10 minutes after that you will have to restart the process again</p>
-    
-    <script src="./js/api.js"></script>
-    <script src="./js/auth.js"></script>
-    <script src="./js/pages/verifyOtp.js"></script>
-</body>
-</html>
+    .container {
+        width: 400px;
+        margin: 100px auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #00baf2;
+    }
+
+    p {
+        color: #4a5568;
+    }
+
+    label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+        color: #002970;
+        font-weight: bold;
+    }
+
+    input {
+        width: 95%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    input:hover {
+        border-color: #00baf2;
+    }
+
+    input:focus {
+        border-color: #00baf2;
+        box-shadow: 0px 0px 5px rgba(0, 186, 242, 0.4);
+    }
+
+    #submitOtp {
+        margin-top: 20px;
+        padding: 12px 35px;
+        border: none;
+        border-radius: 30px;
+        background-color: #00baf2;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #submitOtp:hover {
+        background-color: #0099d4;
+        transform: scale(1.05);
+    }
+
+    #errorMsg {
+        margin-top: 10px;
+    }
+
+    .warning {
+        font-size: 14px;
+        color: #6b7280;
+        margin-top: 20px;
+        background-color: #f8fbff;
+        padding: 10px;
+        border-radius: 8px;
+    }
+</style>

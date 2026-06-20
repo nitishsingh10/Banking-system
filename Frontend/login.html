@@ -3,31 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Garuda Bank</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f8fc;
+            color: #002970;
+            text-align: center;
+            margin: 0;
+            background: linear-gradient(to right,white,rgb(0, 145, 255));
+        }
+
+        h1 {
+            color: #00baf2;
+            margin-top: 50px;
+        }
+
+        p {
+            color: #4a5568;
+        }
+
+        #loginForm {
+            width: 350px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            color: #002970;
+            font-weight: bold;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:hover {
+            border-color: #00baf2;
+        }
+
+        input:focus {
+            border-color: #00baf2;
+            box-shadow: 0px 0px 5px rgba(0, 186, 242, 0.4);
+        }
+
+        #loginBtn {
+            margin-top: 20px;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 30px;
+            background-color: #00baf2;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #loginBtn:hover {
+            background-color: #0099d4;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #00baf2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #errorMsg {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Login to your account</h1>
-    <p>Enter the registered details</p>
+
+    <h1>🏦 Login to Your Account</h1>
+    <p>Enter your registered details</p>
+
     <div id="loginForm">
+
         <div>
-            <label for="email">Enter your email</label><br>
-            <input type="email" id="email" placeholder="registered email">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email">
         </div>
+
         <br>
+
         <div>
-            <label for="password">Enter your password</label><br>
-            <input type="password" id="password" placeholder="your password">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password">
         </div>
-        <br>
-        <p id="errorMsg" style="color: red; display: none;"></p>
+
+        <p id="errorMsg" style="color:red; display:none;"></p>
 
         <button id="loginBtn">Login</button>
+
     </div>
-    <br>
-    <p>Doesn't have an account? <a href="register.html">Create Now</a></p>
+
+    <p>
+        Don't have an account?
+        <a href="register.html">Create Now</a>
+    </p>
 
     <script src="./js/api.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/pages/login.js"></script>
+
 </body>
 </html>
