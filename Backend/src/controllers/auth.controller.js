@@ -244,9 +244,19 @@ const login =  async (req,res)=>{
 
 }
 
-const logout = async (req, res) => {
-    res.clearCookie('token');
-    return res.json({ message: "Logged out successfully" });
-}
+// const logout = async (req, res) => {
+//     res.clearCookie('token'); // using this the token doesnt get cleared
+//     return res.json({ message: "Logged out successfully" });
+// }
 
+// corrected code -> the signature should match exactly to the signing one
+const logout = async (req, res) => {
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        domain: '.nitishsingh.in',
+    });
+    return res.json({ message: "Logged out successfully" });
+};
 module.exports = {register,login,logout,verifyOtp};
