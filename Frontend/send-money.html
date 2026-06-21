@@ -4,39 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Money</title>
+    <title>Send Money - GBI Bank</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/guard.js"></script>
 </head>
 
-<body class="background-image">
-    <div class="card">
-        <h1><i class="bi bi-send"></i> Send Money</h1>
-        <a href="dashboard.html"><i class="bi bi-arrow-left"></i> dashboard</a><br><br>
-        <div id="sendMoneyForm">
-            <label for="receiverEmail"><i class="bi bi-envelope"></i> Receiver Email:</label><br>
-            <input type="email" id="receiverEmail" required>
-            <br>
-            <label for="amount"><i class="bi bi-currency-dollar"></i> Amount:</label><br>
-            <input type="number" id="amount" required>
-            <br>
-            <label for="note"><i class="bi bi-card-text"></i> Note:</label><br>
-            <input type="text" id="note">
-            <br><br>
-            <button id="sendBtn" class="btn-primary"><i class="bi bi-send"></i> Send Money</button>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="bi bi-bank2"></i> GBI Bank
+        </div>
+        <div class="navbar-nav">
+            <a href="dashboard.html" class="btn-secondary"
+                style="padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;"><i class="bi bi-grid"></i>
+                Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="app-container"
+        style="display: flex; justify-content: center; align-items: flex-start; padding-top: 4rem;">
+        <div class="card" style="width: 100%; max-width: 500px;">
+            <div class="mb-4 flex-between">
+                <h2 style="margin-bottom: 0;"><i class="bi bi-send"></i> Send Money</h2>
+                <a href="dashboard.html" style="font-weight: 600;"><i class="bi bi-arrow-left"></i> Back</a>
+            </div>
+
+            <div id="sendMoneyForm">
+                <div class="form-group">
+                    <label for="receiverEmail"><i class="bi bi-envelope"></i> Receiver's Email</label>
+                    <input type="email" id="receiverEmail" placeholder="recipient@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount"><i class="bi bi-currency-dollar"></i> Amount ($)</label>
+                    <input type="number" id="amount" placeholder="e.g. 100" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="note"><i class="bi bi-card-text"></i> Note (Optional)</label>
+                    <input type="text" id="note" placeholder="What is this for?">
+                </div>
+
+                <button id="sendBtn" class="btn-primary" style="padding: 1rem;"><i class="bi bi-send-fill"></i> Send
+                    Funds Now</button>
+            </div>
         </div>
     </div>
 
-
+    <!-- Modal -->
     <div id="transactionModal">
         <div class="modalContent" id="modalContent">
-            <h3>Transaction Details</h3>
-
-            <div id="modalDetails"></div>
-            <br>
-
-            <button id="closeModalBtn" class="btn-primary"><i class="bi bi-x-circle"></i> Close</button>
+            <h3 class="mb-3">Transaction Details</h3>
+            <div id="modalDetails" style="text-align: left; background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
+            </div>
+            <button id="closeModalBtn" class="btn-secondary mt-3" style="width: 100%;"><i class="bi bi-x-circle"></i>
+                Close</button>
         </div>
     </div>
 

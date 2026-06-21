@@ -42,30 +42,34 @@ function showTransactionHistory(transaction) {
     transaction = transaction.transactions.toReversed();
     let count = 0;
     transaction.forEach(tx => {
-        if(count >= 7) return; // fix no of transaction history on dashboard
+        if(count >= 7) return;
         
-        const dateStr = new Date(tx.date).toLocaleString();
-        let typeColor, cardClass;
+        const dateStr = new Date(tx.date).toLocaleDateString();
+        
+        let cardClass, amountPrefix;
         if(tx.type === 'credit'){
-            typeColor = 'green';
-            cardClass = 'credit';
+            cardClass = 'tx-credit';
+            amountPrefix = '+';
         } else if(tx.type === 'debit'){
-            typeColor = 'red';
-            cardClass = 'debit';
+            cardClass = 'tx-debit';
+            amountPrefix = '-';
         } else {
-            typeColor = 'blue';
-            cardClass = 'deposit';
+            cardClass = 'tx-deposit';
+            amountPrefix = '+';
         }
         
         const li = document.createElement('li');
-        li.style.width = '100%';
-        li.style.display = 'block';
-        li.innerHTML = `<div class="transaction-card ${cardClass}">
-            <p>Type: <span style="color:${typeColor}">${tx.type}</span></p>
-            <p>Amount: <span style="color:${typeColor}">${tx.amount}</span></p>
-            <p>Note: ${tx.description}</p>
-            <p>Date: ${dateStr}</p>
-        </div>`;
+        li.innerHTML = `
+            <div class="transaction-card ${cardClass}">
+                <div class="tx-left">
+                    <span class="tx-type">${tx.type}</span>
+                    <span class="tx-desc">${tx.description}</span>
+                </div>
+                <div class="tx-right">
+                    <span class="tx-amount">${amountPrefix}${tx.amount}</span>
+                    <div class="tx-date">${dateStr}</div>
+                </div>
+            </div>`;
         transactionList.appendChild(li);
         count++;
     });
