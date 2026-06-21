@@ -35,22 +35,22 @@ function showTransactionHistory(transaction){
 
         if(tx.type === 'credit'){
             history.innerHTML +=`<div class="transaction-card credit">
-                <p>Type: <span style = "color:green">${tx.type}</span></p>
-                <p>Amount: <span style = "color:green">${tx.amount}</span</p>
+                <p>Type: <span style="color:green">${tx.type}</span></p>
+                <p>Amount: <span style="color:green">${tx.amount}</span></p>
                 <p>Date: ${tx.date}</p>
             </div>`
         }
         else if(tx.type === 'debit'){
             history.innerHTML +=`<div class="transaction-card debit">
-                <p>Type: <span style = "color:red">${tx.type}</span></p>
-                <p>Amount: <span style = "color:red">${tx.amount}</span</p>
+                <p>Type: <span style="color:red">${tx.type}</span></p>
+                <p>Amount: <span style="color:red">${tx.amount}</span></p>
                 <p>Date: ${tx.date}</p>
             </div>`
         }
         else{
             history.innerHTML +=`<div class="transaction-card deposit">
-                <p>Type: <span style = "color:blue">${tx.type}</span></p>
-                <p>Amount: <span style = "color:blue">${tx.amount}</span</p>
+                <p>Type: <span style="color:blue">${tx.type}</span></p>
+                <p>Amount: <span style="color:blue">${tx.amount}</span></p>
                 <p>Date: ${tx.date}</p>
             </div>`
         }

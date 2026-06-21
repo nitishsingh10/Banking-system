@@ -10,8 +10,15 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
         return;
     }
 
+    const sendBtn = document.getElementById('sendBtn');
+    sendBtn.disabled = true;
+
     const response = await sendMoney(receiverEmail, amount, note);
     
+    setTimeout(() => {
+        sendBtn.disabled = false;
+    }, 30000);
+
     document.getElementById('receiverEmail').value = ''
     document.getElementById('amount').value = ''
     document.getElementById('note').value = ''

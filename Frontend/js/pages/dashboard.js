@@ -43,8 +43,29 @@ function showTransactionHistory(transaction) {
     let count = 0;
     transaction.forEach(tx => {
         if(count >= 7) return; // fix no of transaction history on dashboard
+        
+        const dateStr = new Date(tx.date).toLocaleString();
+        let typeColor, cardClass;
+        if(tx.type === 'credit'){
+            typeColor = 'green';
+            cardClass = 'credit';
+        } else if(tx.type === 'debit'){
+            typeColor = 'red';
+            cardClass = 'debit';
+        } else {
+            typeColor = 'blue';
+            cardClass = 'deposit';
+        }
+        
         const li = document.createElement('li');
-        li.innerHTML = `Amount: ${tx.amount}, Status: ${tx.type}, note: ${tx.description} <br><br>`;
+        li.style.width = '100%';
+        li.style.display = 'block';
+        li.innerHTML = `<div class="transaction-card ${cardClass}">
+            <p>Type: <span style="color:${typeColor}">${tx.type}</span></p>
+            <p>Amount: <span style="color:${typeColor}">${tx.amount}</span></p>
+            <p>Note: ${tx.description}</p>
+            <p>Date: ${dateStr}</p>
+        </div>`;
         transactionList.appendChild(li);
         count++;
     });

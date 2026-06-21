@@ -5,9 +5,9 @@ const BASE_URL = 'https://gbi.nitishsingh.in/api' // production
 async function request(path, options = {}) { // path will specify the url and options will specify the data to be sent to the backend
     try {
         const res = await fetch(`${BASE_URL}${path}`, {
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json'
-             },
+            },
             credentials: 'include', // sends the cookies : by default cookies are not sent
             ...options, // other data coming from frontend that has to be sent to the Backend
         });
@@ -16,7 +16,7 @@ async function request(path, options = {}) { // path will specify the url and op
 
         if (res.status === 401) {
             sessionStorage.clear();
-            return { success: false, status: 401, data: { message: 'Session has expired, login again' } };
+            return { success: false, status: 401, data: { message: 'invalid credentials or Session has expired, login again' } };
         }
 
         return { success: res.ok, status: res.status, data }; // if everything is okay return the data to the caller method of respective page

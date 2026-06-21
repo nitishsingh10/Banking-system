@@ -168,6 +168,15 @@ button:active,
     transform: translateY(0);
 }
 
+button:disabled,
+.btn-primary:disabled {
+    background-color: #a0c4e4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    color: #f0f0f0;
+}
+
 /* Navbar */
 nav {
     display: flex;
