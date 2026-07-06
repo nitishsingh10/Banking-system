@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const Wallet = require('../models/wallet.model')
 const bcrypt = require('bcrypt');
-const {sendOTPEmail,generateOTP} = require('../services/authMail.services');
+const {sendOTPEmail,generateOTP,sendResetEmail} = require('../services/authMail.services');
 const {loginMail} = require('../services/email.services');
 const uaParser = require('ua-parser-js');
 
@@ -244,6 +244,94 @@ const login =  async (req,res)=>{
 
 }
 
+const resetPassword = async (req,res)=>{
+
+    try{
+        const {email,password,otp} = req.body;
+    
+        if(!email || !password || !otp){
+            return res.json({
+                message : "All fields are required"
+            })
+        }
+    
+        const user = await User.findOne({email});
+        if(!user.isVerified){
+            return res.json({
+                message : "User is mot verified"
+            })
+        }
+    
+        if(!user){
+            return res.json({
+                message : "Invalid user"
+            })
+        }
+    
+        const otpAge = Date.now() - new Date(user.otpAge).getTime(); // get the time of otp created 
+        
+        if (otpAge > 10*60*1000) { // if the age of otp is greater than 10 minutes then.. otp must have expired
+            return res.status(400).json({
+                message: 'OTP has expired, please signup again' // the signup process shall be restarted because the data is no longer ther in db 
+            });
+        }
+        
+        const isOtpValid = await bcrypt.compare(otp,user.otp);
+        if(!isOtpValid){
+            return res.json({
+                message : "Invalid Otp"
+            })
+        }
+    
+        user.password = await bcrypt.hash(password,10);
+        user.otp = null;
+        user.otpAge = null;
+        user.save();
+    
+        return res.json({
+            message : "Password reset successfully, Try logging in again"
+        });
+
+    }catch(err){
+        return res.json({
+            message : err.message
+        })
+    }
+}
+
+const forgetPassword = async (req,res)=>{
+
+    try{
+
+        const {email} = req.body;
+        
+        const user = await User.findOne({email});
+
+        if(!user){
+            return res.status(404).json({
+                message : "User not found"
+            })
+        }
+
+        const otp = generateOTP();
+        try{
+            await sendResetEmail(email,otp); // otp sent to the mail
+        } catch(err){
+            return res.status(500).json({message: 'Failed to send the otp ' + err.message});
+        }
+
+        user.otp = await bcrypt.hash(otp,10);
+        user.otpAge = new Date();
+        await user.save();
+        
+    }catch(err){
+        return res.status(500).json({
+            message:"Internal Server Error"
+        })
+    }
+
+}
+
 // const logout = async (req, res) => {
 //     res.clearCookie('token'); // using this the token doesnt get cleared
 //     return res.json({ message: "Logged out successfully" });
@@ -259,4 +347,4 @@ const logout = async (req, res) => {
     });
     return res.json({ message: "Logged out successfully" });
 };
-module.exports = {register,login,logout,verifyOtp};
+module.exports = {register,login,logout,verifyOtp,resetPassword,forgetPassword};

@@ -34,4 +34,31 @@ const sendOTPEmail = async (email, otp) => {
     }
 }
 
-module.exports = { sendOTPEmail, generateOTP };
+const sendResetEmail = async (email, otp) => {
+
+    // adding space betweem numbers to make it look good
+    const otpstring = otp.toString()
+                            .split('')
+                            .join(' ');
+
+    const mailOptions = {
+        to: email,
+        subject: 'Reset Password',
+        html: `<h2>Your OTP to reset the password</h2> 
+                <h2 style="color: #ff9100ff;">Use this OTP to verify your account</h2>
+                <div style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; color: #1e99fdff; text-align: center; font-size: 20px;">${otpstring}</div>
+            `
+    };
+
+    try {
+
+        await sendMail(mailOptions); // sending mail directly via brevo API
+        console.log("otp sent");
+
+    } catch (error) {
+        
+        console.error(`Error sending otp :  ${error.message}`);
+    }
+}
+
+module.exports = { sendOTPEmail, generateOTP, sendResetEmail };
