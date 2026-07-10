@@ -39,3 +39,20 @@ async function login(email,password){
         body : JSON.stringify({email,password})
     });
 }
+
+// forget and reset password
+async function forgetPassword(email) {
+    
+    return request('/auth/forgetPassword',{
+        method : 'POST',
+        body : JSON.stringify({email})
+    });
+}
+
+async function resetPassword(email,otp,password) {
+    
+    return request('/auth/resetPassword',{
+        method : 'POST',
+        body : JSON.stringify({email,otp,password})
+    });
+}

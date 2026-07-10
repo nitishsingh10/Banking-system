@@ -288,7 +288,7 @@ const resetPassword = async (req,res)=>{
         user.otpAge = null;
         user.save();
     
-        return res.json({
+        return res.status(201).json({
             message : "Password reset successfully, Try logging in again"
         });
 
@@ -323,6 +323,10 @@ const forgetPassword = async (req,res)=>{
         user.otp = await bcrypt.hash(otp,10);
         user.otpAge = new Date();
         await user.save();
+
+        return res.status(201).json({
+            message : 'Otp to reset password sent successfully'
+        })
         
     }catch(err){
         return res.status(500).json({
