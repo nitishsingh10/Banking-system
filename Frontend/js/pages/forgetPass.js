@@ -35,8 +35,8 @@ document.getElementById('sendOtp').addEventListener('click',async (e)=>{
 
 document.getElementById('resetBtn').addEventListener('click', async ()=>{
     const email = sessionStorage.getItem('userEmail');
-    const otp = document.getElementById('otp')?.value;
-    const password = document.getElementById('newPassword')?.value;
+    const otp = document.getElementById('otp').value;
+    const password = document.getElementById('newPassword').value;
 
     if(!email || !otp || !password){
         return alert('all fields are required');
