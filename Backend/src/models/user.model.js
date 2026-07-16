@@ -46,7 +46,7 @@ const User = new Schema({
         default:null
     },
     otpAge:{
-        type: date,
+        type: Date,
         default : null
     },
     // if the user is not verified it's residual data must be deleted
