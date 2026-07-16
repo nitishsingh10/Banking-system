@@ -11,6 +11,8 @@ document.getElementById('sendOtp').addEventListener('click',async (e)=>{
     sessionStorage.setItem('userEmail',email);
 
     if(res && res.success){
+        document.getElementById('OTP').disabled = false;
+        document.getElementById('newPassword').disabled = false;
         e.target.style.color = 'red'
         emailInput.disabled = true;
         e.target.style.pointerEvents = 'none'
@@ -35,7 +37,7 @@ document.getElementById('sendOtp').addEventListener('click',async (e)=>{
 
 document.getElementById('resetBtn').addEventListener('click', async ()=>{
     const email = sessionStorage.getItem('userEmail');
-    const otp = document.getElementById('otp').value;
+    const otp = document.getElementById('OTP').value;
     const password = document.getElementById('newPassword').value;
 
     if(!email || !otp || !password){
