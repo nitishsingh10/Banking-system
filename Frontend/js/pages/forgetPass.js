@@ -8,7 +8,8 @@ document.getElementById('sendOtp').addEventListener('click',async (e)=>{
     }
 
     const res = await forgetPassword(email);
-    
+    sessionStorage.setItem('userEmail',email);
+
     if(res && res.success){
         e.target.style.color = 'red'
         emailInput.disabled = true;
@@ -33,7 +34,7 @@ document.getElementById('sendOtp').addEventListener('click',async (e)=>{
 })
 
 document.getElementById('resetBtn').addEventListener('click', async ()=>{
-    const email = document.getElementById('email')?.value;
+    const email = sessionStorage.getItem('userEmail');
     const otp = document.getElementById('otp')?.value;
     const password = document.getElementById('newPassword')?.value;
 
@@ -45,7 +46,6 @@ document.getElementById('resetBtn').addEventListener('click', async ()=>{
 
     if(res && res.success){
         alert('Password changed successfully');
-        sessionStorage.setItem('userEmail',email);
         window.location.href = './login.html';
     }
     else{
