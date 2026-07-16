@@ -4,7 +4,7 @@ if(sessionStorage.getItem('userEmail')){
 
 document.getElementById('loginBtn').addEventListener('click', async ()=>{
 
-    const email = document.getElementById('email').value.trim();
+    const email = document.getElementById('email').value.trim().toLowerCase();
     const password = document.getElementById('password').value.trim();
 
     if(!email || !password){
@@ -20,4 +20,4 @@ document.getElementById('loginBtn').addEventListener('click', async ()=>{
     else{
         alert('error : ' + res.data.message);
     }
-})
+});

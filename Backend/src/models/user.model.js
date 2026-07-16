@@ -34,8 +34,8 @@ const User = new Schema({
         type:String,
         required:true
     },
-    // two fields required for otp verification
 
+    // below feilds for verification and passwod authentication
     isVerified:{
         type:Boolean, 
         default:false, // by default w/o verification it should be false, after verification attach the wallet and change to true

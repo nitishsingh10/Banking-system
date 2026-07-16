@@ -1,7 +1,7 @@
 document.getElementById('registerBtn').addEventListener('click',async ()=>{
     
     const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
+    const email = document.getElementById('email').value.trim().toLowerCase();
     const password = document.getElementById('password').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
