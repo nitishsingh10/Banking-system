@@ -19,7 +19,7 @@ const rating = new Schema({
         require : true
     },
     time : {
-        type : Date
+        type : String
     }
 });
 
