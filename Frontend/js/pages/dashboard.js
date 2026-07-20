@@ -75,6 +75,9 @@ function showTransactionHistory(transaction) {
     });
 }
 
+document.getElementById('rateBtn').addEventListener('click',()=>{
+    window.location.href = './ratehere.html'
+})
 document.getElementById('logoutBtn').addEventListener('click', async ()=>{
     await logout();
 })
