@@ -30,12 +30,12 @@ Banking-system/
 │       │   └── email.js                # Brevo configuration
 │       │
 │       ├── controllers/
-│       │   ├── auth.controller.js      # register, login, logout, verifyOtp
+│       │   ├── auth.controller.js      # register, login, logout, verifyOtp, resetPassword
 │       │   ├── wallet.controller.js    # balance, deposit
 │       │   └── transaction.controller.js
 │       │
 │       ├── middleware/
-│       │   └── auth.middleware.js      # JWT via cookie or Bearer token
+│       │   └── auth.middleware.js      # JWT via cookie
 │       │
 │       ├── models/
 │       │   ├── user.model.js           # TTL index on otpCreatedAt (10 min)
@@ -49,22 +49,24 @@ Banking-system/
 │       │
 │       ├── services/
 │       │   ├── authMail.services.js    # OTP generation + email
-│       │   └── email.services.js       # login + deposit alert emails
+│       │   └── email.services.js       # login + transaction alert emails
 │       │
 │       └── main.js
 │
 ├── Frontend/
+│   ├── forgetPass.html
 │   ├── index.html
+│   ├── ratehere.html
 │   ├── register.html
 │   ├── verify-otp.html
+│   ├── send-money.html
 │   ├── login.html
 │   ├── dashboard.html
 │   └── wallet.html
 │   │
 │   ├── css/
-│   │   ├── main.css
-│   │   ├── auth.css
-│   │   └── dashboard.css
+│   │   ├── index.css
+│   │   └── style.css
 │   │
 │   └── js/
 │       ├── api.js          # base fetch wrapper, handles 401 globally
@@ -77,6 +79,8 @@ Banking-system/
 │           ├── dashboard.js
 │           ├── login.js
 │           ├── register.js
+│           ├── rate.js
+│           ├── forgetPass.js
 │           ├── verify-otp.js
 │           ├── sendMoney.js
 │           └── wallet-page.js

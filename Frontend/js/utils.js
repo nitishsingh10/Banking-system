@@ -33,7 +33,6 @@ async function transactionHistory(){
 
 }
 
-
 // for logout
 // clears the cookie on server, clears localStorage on user side
 async function logout(){
@@ -44,4 +43,11 @@ async function logout(){
 
     sessionStorage.clear(); // clears the cookie from the session storage
     window.location.href = './login.html' 
+}
+
+async function rate(userRating){
+    return request('wallet/rate',{
+        method : 'POST',
+        body : JSON.stringify(userRating)
+    })
 }

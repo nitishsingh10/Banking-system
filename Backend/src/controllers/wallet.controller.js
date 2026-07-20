@@ -2,7 +2,7 @@ const Wallet = require('../models/wallet.model');
 const {depositMail} = require('../services/email.services');
 const transaction = require('../models/transaction.model');
 const mongoose = require('mongoose');
-
+const rating = require('../models/rating.model');
 
 const balance =  async (req, res) => {
 
@@ -103,4 +103,35 @@ const deposit = async (req, res) => {
     }
 };
 
-module.exports = { balance, deposit };
+const rate = async (req,res)=>{
+
+    try{
+
+        const {email,name,star,comment} = req.body;
+
+        const time = new Date().toLocaleString('en-IN',{
+                timeZone : 'Asia/Kolkata',
+                dateStyle : 'full',
+                timeStyle : 'medium'
+        });
+
+        const userRating = new rating({
+            email,
+            name,
+            star,
+            comment,
+            time
+        });
+
+        await userRating.save();
+        return res.status(200).json({
+            message : 'Thank you for your response'
+        });
+
+    }catch(err){
+        return res.status(400).json({
+            message : err.message
+        })
+    }
+}
+module.exports = { balance, deposit, rate};

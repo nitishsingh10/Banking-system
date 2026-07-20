@@ -1,5 +1,7 @@
-document.getElementById('registerBtn').addEventListener('click',async ()=>{
+let errMsg = document.getElementById('errorMsg');
+document.getElementById('registerBtn').addEventListener('click',async (e)=>{
     
+    e.target.disabled = true;
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim().toLowerCase();
     const password = document.getElementById('password').value.trim();
@@ -7,7 +9,8 @@ document.getElementById('registerBtn').addEventListener('click',async ()=>{
     const address = document.getElementById('address').value.trim();
 
     if(!name || !email || !password || !phone || !address){
-        return alert('all fields are required');
+        errMsg.style.display = 'block'
+        errMsg.innerHTML = 'all fields are required';
     }
 
     const res = await register(name,email,password,phone,address); // fields from the user
@@ -21,6 +24,7 @@ document.getElementById('registerBtn').addEventListener('click',async ()=>{
         window.location.href = './login.html';
     }
     else{
+        e.target.disabled = false;
         alert('error: ' + res.data.message);
     }
 });

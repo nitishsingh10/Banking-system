@@ -1,21 +1,23 @@
+let errMsg = document.getElementById('errorMsg');
 document.getElementById('sendOtp').addEventListener('click',async (e)=>{
     e.preventDefault();
     const emailInput = document.getElementById('email');
     const email = emailInput?.value.trim().toLowerCase();
 
     if(!email){
-        return alert('Please enter your registered mail');
+        errMsg.style.display = 'block'
+        return errMsg.innerHTML = 'Please enter your registered mail';
     }
 
+    e.target.style.color = 'red'
+    e.target.style.pointerEvents = 'none'
     const res = await forgetPassword(email);
     sessionStorage.setItem('userEmail',email);
 
     if(res && res.success){
         document.getElementById('OTP').disabled = false;
         document.getElementById('newPassword').disabled = false;
-        e.target.style.color = 'red'
         emailInput.disabled = true;
-        e.target.style.pointerEvents = 'none'
         let time = 30;
         let tId = setInterval(() => {
             time--;
@@ -30,18 +32,23 @@ document.getElementById('sendOtp').addEventListener('click',async (e)=>{
         },1000*30)
     }
     else{
-        alert('error : ' +res.data.message);
+        errMsg.style.display = 'block';
+        errMsg.innerHTML = `${res.data.message}`
     }
 
 })
 
-document.getElementById('resetBtn').addEventListener('click', async ()=>{
+document.getElementById('resetBtn').addEventListener('click', async (e)=>{
+    e.target.disabled = true
+    errMsg.style.display = 'none'
+
     const email = sessionStorage.getItem('userEmail');
-    const otp = document.getElementById('OTP').value;
-    const password = document.getElementById('newPassword').value;
+    const otp = document.getElementById('OTP').value.trim();
+    const password = document.getElementById('newPassword').value.trim();
 
     if(!email || !otp || !password){
-        return alert('all fields are required');
+        errMsg.style.display = 'block'
+        return errMsg.innerHTML = 'all fields are required';
     }
 
     const res = await resetPassword(email,otp,password);
@@ -51,6 +58,8 @@ document.getElementById('resetBtn').addEventListener('click', async ()=>{
         window.location.href = './login.html';
     }
     else{
-        alert('error : ' +res.data.message);
+        e.target.disabled = false
+        errMsg.style.display = 'block'
+        errMsg.innerHTML = 'error : ' +res.data.message;
     }
 })
