@@ -115,7 +115,6 @@ const rate = async (req,res)=>{
                 timeStyle : 'medium'
         });
 
-        console.log(email,name,star,comment);
         const userRating = new rating({
             email,
             name,

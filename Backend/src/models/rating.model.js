@@ -10,11 +10,11 @@ const rating = new Schema({
     name : {
         type : String
     },
-    stars : {
+    star : {
         type : Number,
         required : true
     },
-    Comment : {
+    comment : {
         type : String,
         required : true
     },

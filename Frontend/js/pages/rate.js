@@ -13,9 +13,7 @@ document.getElementById('submitBtn').addEventListener('click',async ()=>{
     }
 
     const userRating = {email,name,star,comment}
-    console.log(userRating);
     const res = await rate(userRating);
-    console.log(res);
 
     if(res && res.success){
         document.querySelector('body').innerHTML = `<div id="transactionModal" style="display : block">
