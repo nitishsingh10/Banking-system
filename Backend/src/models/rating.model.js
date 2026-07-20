@@ -12,11 +12,11 @@ const rating = new Schema({
     },
     stars : {
         type : Number,
-        require : true
+        required : true
     },
     Comment : {
         type : String,
-        require : true
+        required : true
     },
     time : {
         type : String
