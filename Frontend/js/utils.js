@@ -46,6 +46,7 @@ async function logout(){
 }
 
 async function rate(userRating){
+    console.log(userRating);
     return request('/wallet/ratehere',{
         method : 'POST',
         body : JSON.stringify(userRating)
