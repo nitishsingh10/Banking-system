@@ -45,23 +45,6 @@ const register =  async (req, res) => {
         // if otp is not verified withing the given time the user shall be deleted from the db
         await user.save();
 
-        const token = jwt.sign({
-                id: user._id, // create token after user creation
-                name: user.name,
-                email: user.email
-            },
-            process.env.JWT_SECRET,
-            { expiresIn: '7d' });
-
-            res.cookie("token", token, {
-                 httpOnly: true ,
-                 maxAge: 7 * 24 * 60 * 60 * 1000,
-                 secure:true, // if samesite : none and this as false, then cookies get dropped from the req
-                 sameSite: 'lax',
-                 domain : '.nitishsingh.in' // set the domain for the cookie 
-            });
-
-
         return res.status(201).json({
             message: "User created successfully : verify otp to connect wallet",
             user: {
@@ -136,6 +119,23 @@ const verifyOtp = async (req,res) => {
         user.otp = null;
         user.otpCreatedAt = null;
         await user.save();
+
+        const token = jwt.sign({
+                id: user._id, // create token after user 
+                name: user.name,
+                email: user.email
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' });
+
+            res.cookie("token", token, {
+                 httpOnly: true ,
+                 maxAge: 7 * 24 * 60 * 60 * 1000,
+                 secure:true, // if samesite : none and this as false, then cookies get dropped from the req
+                 sameSite: 'lax',
+                 domain : '.nitishsingh.in' // set the domain for the cookie 
+            });
+
     
         return res.status(200).json({
             message: "OTP verified successfully and wallet connected",
@@ -210,7 +210,6 @@ const login =  async (req,res)=>{
         };
 
         const location = await getLocation(req.ip);
-        console.log(location);
 
         const systemDetails = {
             browser: device.browser,
@@ -224,7 +223,7 @@ const login =  async (req,res)=>{
             }) 
         }
 
-        loginMail(user.email,systemDetails);
+        await loginMail(user.email,systemDetails);
         
         // if login successfull return userdata
         return res.json({
@@ -256,17 +255,17 @@ const resetPassword = async (req,res)=>{
         }
     
         const user = await User.findOne({email});
+        if(!user){
+            return res.json({
+                message : "Invalid user"
+            })
+        }
         if(!user.isVerified){
             return res.json({
                 message : "User is mot verified"
             })
         }
     
-        if(!user){
-            return res.json({
-                message : "Invalid user"
-            })
-        }
     
         const otpAge = Date.now() - new Date(user.otpAge).getTime(); // get the time of otp created 
         

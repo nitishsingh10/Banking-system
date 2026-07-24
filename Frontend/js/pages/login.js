@@ -12,6 +12,7 @@ document.getElementById('loginBtn').addEventListener('click', async (e)=>{
     if(!email || !password){
         errMsg.style.display = 'block'
         errMsg.innerHTML = 'all fields are required';
+        return;
     }
 
     const res = await login(email,password);

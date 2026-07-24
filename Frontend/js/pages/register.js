@@ -11,6 +11,7 @@ document.getElementById('registerBtn').addEventListener('click',async (e)=>{
     if(!name || !email || !password || !phone || !address){
         errMsg.style.display = 'block'
         errMsg.innerHTML = 'all fields are required';
+        return;
     }
 
     const res = await register(name,email,password,phone,address); // fields from the user

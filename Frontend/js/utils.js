@@ -1,5 +1,18 @@
 // all the utilities api will be written here
 
+// escapes user-supplied text before it goes into an innerHTML template.
+// names and transaction notes/descriptions come from other users' input,
+// so they must always be escaped before rendering - never trust them raw.
+
+function escapeHtml(str){
+    if(str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
 // check balance
 async function checkBalance(){

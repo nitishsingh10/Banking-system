@@ -174,7 +174,10 @@ const getTransactions = async (req, res) => {
             return res.status(404).json({message:"wallet not found"});
         }
 
-        const transactions = await transaction.find({walletId:Wallet._id});
+        // getting only the name and email of user for security.
+        const transactions = await transaction.find({walletId:Wallet._id})
+            .populate('senderId', 'name email')
+            .populate('receiverId', 'name email');
 
         if(!transactions){
             return res.status(404).json({message:"no transactions yet"});

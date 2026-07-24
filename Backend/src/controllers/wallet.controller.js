@@ -106,9 +106,8 @@ const deposit = async (req, res) => {
 const rate = async (req,res)=>{
 
     try{
-
-        const {email,name,star,comment} = req.body;
-
+        const {name,star,comment} = req.body;
+        const email = req.user.email;
         const time = new Date().toLocaleString('en-IN',{
                 timeZone : 'Asia/Kolkata',
                 dateStyle : 'full',

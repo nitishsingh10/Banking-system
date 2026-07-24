@@ -42,28 +42,37 @@ function showTransactionHistory(transaction) {
     transaction = transaction.transactions.toReversed();
     let count = 0;
     transaction.forEach(tx => {
-        if(count >= 7) return;
+        if(count >= 5) return;
         
         const dateStr = new Date(tx.date).toLocaleDateString();
         
-        let cardClass, amountPrefix;
+        let cardClass, amountPrefix, counterpartyLabel, counterparty;
         if(tx.type === 'credit'){
+            // this entry belongs to the receiver's wallet -> other party is the sender
             cardClass = 'tx-credit';
             amountPrefix = '+';
+            counterpartyLabel = 'From';
+            counterparty = tx.senderId?.name || tx.senderId?.email || 'Unknown';
         } else if(tx.type === 'debit'){
+            // this entry belongs to the sender's wallet -> other party is the receiver
             cardClass = 'tx-debit';
             amountPrefix = '-';
+            counterpartyLabel = 'To';
+            counterparty = tx.receiverId?.name || tx.receiverId?.email || 'Unknown';
         } else {
             cardClass = 'tx-deposit';
             amountPrefix = '+';
+            counterpartyLabel = null;
+            counterparty = null;
         }
         
         const li = document.createElement('li');
         li.innerHTML = `
             <div class="transaction-card ${cardClass}">
                 <div class="tx-left">
-                    <span class="tx-type">${tx.type}</span>
-                    <span class="tx-desc">${tx.description}</span>
+                    <span class="tx-type">${escapeHtml(tx.type)}</span>
+                    <span class="tx-desc">${escapeHtml(tx.description)}</span>
+                    ${counterparty ? `<span class="tx-counterparty">${escapeHtml(counterpartyLabel)}: ${escapeHtml(counterparty)}</span>` : ''}
                 </div>
                 <div class="tx-right">
                     <span class="tx-amount">${amountPrefix}π${tx.amount}</span>

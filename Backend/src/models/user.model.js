@@ -45,6 +45,7 @@ const User = new Schema({
         type:String,
         default:null
     },
+    // for further otp verifications i.e. reset password
     otpAge:{
         type: Date,
         default : null

@@ -1,4 +1,3 @@
-let email = sessionStorage.getItem('userEmail');
 const errMsg = document.getElementById('errorMsg');
 document.getElementById('submitBtn').addEventListener('click',async ()=>{
     const name = document.getElementById('userName').value.trim() || 'Anonymous';
@@ -12,7 +11,7 @@ document.getElementById('submitBtn').addEventListener('click',async ()=>{
         return;
     }
 
-    const userRating = {email,name,star,comment}
+    const userRating = {name,star,comment}
     const res = await rate(userRating);
 
     if(res && res.success){
