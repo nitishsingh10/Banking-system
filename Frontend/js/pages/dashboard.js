@@ -42,7 +42,7 @@ function showTransactionHistory(transaction) {
     transaction = transaction.transactions.toReversed();
     let count = 0;
     transaction.forEach(tx => {
-        if(count >= 5) return;
+        if(count >= 3) return;
         
         const dateStr = new Date(tx.date).toLocaleDateString();
         

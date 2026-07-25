@@ -11,6 +11,7 @@ document.getElementById('registerBtn').addEventListener('click',async (e)=>{
     if(!name || !email || !password || !phone || !address){
         errMsg.style.display = 'block'
         errMsg.innerHTML = 'all fields are required';
+        e.target.disabled = false;
         return;
     }
 
@@ -29,3 +30,16 @@ document.getElementById('registerBtn').addEventListener('click',async (e)=>{
         alert('error: ' + res.data.message);
     }
 });
+
+function validateInput(input, customMessage, inpId) {
+    let emErr = document.getElementById(inpId);
+  // If the input fails the regex pattern check
+  if(input.validity.patternMismatch) {
+    emErr.textContent = customMessage;
+    emErr.style.display = 'block'
+  }
+  else{
+    emErr.textContent = '';
+    emErr.style.display = 'none'
+  }
+}

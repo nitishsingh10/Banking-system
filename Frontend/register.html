@@ -20,17 +20,32 @@
             
             <div class="form-group">
                 <label for="email"><i class="bi bi-envelope"></i> Email Address</label>
-                <input type="email" id="email" placeholder="name@example.com" required>
+                <input type="email" id="email" placeholder="name@example.com" required
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+(\.[a-zA-Z]{2,})+"
+                    onblur="validateInput(this, 'Oops! That does not look like a valid email address.','emErr')"
+    
+                >
+                <p id="emErr" style="color: #ef9f44; font-size: 0.9rem; margin-bottom: 1rem; display: none;"></p>
             </div>
             
             <div class="form-group">
                 <label for="password"><i class="bi bi-lock"></i> Password</label>
-                <input type="password" id="password" placeholder="Min 8 characters" required>
+                <input type="password" id="password" placeholder="Min 8 characters" required
+                    pattern="(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}" 
+                    oninput="validateInput(this, 'Minimum 8 characters, at least one number and one special character.','passErr')"
+    
+                >
+                <p id="passErr" style="color: #ef9f44; font-size: 0.9rem; margin-bottom: 1rem; display: none;"></p>
             </div>
             
             <div class="form-group">
                 <label for="phone"><i class="bi bi-telephone"></i> Phone Number</label>
-                <input type="text" id="phone" placeholder="9876543210" required>
+                <input type="text" id="phone" placeholder="9876543210" required
+                    pattern="[6-9]\d{9}"
+                    onblur="validateInput(this, 'Please enter a valid 10-digit mobile number','phErr')"
+    
+                >
+                <p id="phErr" style="color: #ef9f44; font-size: 0.9rem; margin-bottom: 1rem; display: none;"></p>
             </div>
             
             <div class="form-group mb-3">
