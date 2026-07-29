@@ -84,22 +84,38 @@ document.getElementById('addFundsBtn').addEventListener('click',async ()=>{
     }
     const res = await depositMoney(amount);
 
-    disableBtn(); // add funds cooldown
-
+    
     if(res && res.success){
         balanceField.textContent = 'π' + res.data.balance;
+        showSlip(res.data);
+        showTransaction();
+        showBalance();
+        document.getElementById('amount').value = '';
+        console.log(res);
     }
+    else{
+        showError("Couldn't add funds, please try again later");
+        return;
+    }
+    disableBtn(); // add funds cooldown
 
-    showSlip(res.data);
-    showTransaction();
-    showBalance();
-    document.getElementById('amount').value = '';
 })
 
 function disableBtn(){
-    document.getElementById('addFundsBtn').disabled = true;
+    const addFundsBtn = document.getElementById('addFundsBtn');
+    addFundsBtn.disabled = true;
+    let time = 30;
+    let tId = setInterval(()=>{
+        if(time>0){
+            time--;
+            addFundsBtn.textContent = `Cooldown ${time}`
+        }
+    },1000);
     setTimeout(()=>{
-        document.getElementById('addFundsBtn').disabled = false;
+        addFundsBtn.innerHTML = `<i class="bi bi-plus-circle"></i> Add Funds to
+                        Wallet`
+        addFundsBtn.disabled = false;
+        clearInterval(tId);
     }, 30000);
 }
 
