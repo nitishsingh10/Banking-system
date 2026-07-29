@@ -1,3 +1,25 @@
+const userArea = document.getElementById('foundUser');
+document.getElementById('receiverEmail').addEventListener('blur',async (e)=>{
+
+    const email = e.target.value.trim();
+    if(!email){
+        return;
+    }
+
+    const user = await getUser(email);
+
+    if(user && user.success){
+        userArea.style.color = 'green';
+        userArea.innerHTML = `${escapeHtml(user.data.name)} <i class="bi bi-check-circle-fill"></i>`;
+        return;
+    }
+    else{
+        userArea.style.color = 'red';
+        userArea.innerHTML = `<i class="bi bi-check-circle-fill"></i> User not Found`;
+        return;
+    }
+
+})
 document.getElementById('sendBtn').addEventListener('click', async () => {
 
     const receiverEmail = document.getElementById('receiverEmail').value.trim();

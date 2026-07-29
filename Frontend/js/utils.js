@@ -46,6 +46,12 @@ async function transactionHistory(){
 
 }
 
+async function getUser(email) {
+    return request(`/transaction/user?email=${email}`,{
+        method : 'GET'
+    })
+}
+
 // for logout
 // clears the cookie on server, clears localStorage on user side
 async function logout(){
