@@ -15,19 +15,28 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
 
     const response = await sendMoney(receiverEmail, amount, note);
     
-    setTimeout(() => {
-        sendBtn.disabled = false;
-    }, 30000);
-
-    document.getElementById('receiverEmail').value = ''
-    document.getElementById('amount').value = ''
-    document.getElementById('note').value = ''
-
+    
     if(response && response.data.success){
+        let time = 30;
+        let tId = setInterval(()=>{
+            if(time>0){
+                time--;
+                sendBtn.textContent = `Cooldown ${time}`
+            }
+        },1000);
+        setTimeout(() => {
+            sendBtn.disabled = false;
+            clearInterval(tId);
+        }, 30000);
+    
+        document.getElementById('receiverEmail').value = ''
+        document.getElementById('amount').value = ''
+        document.getElementById('note').value = ''
         showSlip(response.data);
     }
     else{
         showError(response.data.message)
+        sendBtn.disabled = false;
     }
 });
 
