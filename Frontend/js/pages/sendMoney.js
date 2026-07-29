@@ -15,7 +15,7 @@ document.getElementById('receiverEmail').addEventListener('blur',async (e)=>{
     }
     else{
         userArea.style.color = 'red';
-        userArea.innerHTML = `<i class="bi bi-check-circle-fill"></i> User not Found`;
+        userArea.innerHTML = `<i class="bi bi-exclamation-circle-fill"></i> User not Found`;
         return;
     }
 
