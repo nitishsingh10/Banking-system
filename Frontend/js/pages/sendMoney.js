@@ -3,6 +3,7 @@ document.getElementById('receiverEmail').addEventListener('blur',async (e)=>{
 
     const email = e.target.value.trim();
     if(!email){
+        userArea.innerHTML = '';
         return;
     }
 
@@ -39,6 +40,7 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
     
     
     if(response && response.data.success){
+        userArea.innerHTML = '';
         let time = 30;
         let tId = setInterval(()=>{
             if(time>0){
