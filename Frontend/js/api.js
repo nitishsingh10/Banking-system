@@ -20,7 +20,6 @@ async function request(path, options = {}) { // path will specify the url and op
             return { success: false, status: 401, data: { message: 'invalid credentials or Session has expired, login again' } };
         }
         if (res.status === 404) {
-            sessionStorage.clear();
             return { success: false, status: 404, data: { message: 'data not found' } };
         }
 
