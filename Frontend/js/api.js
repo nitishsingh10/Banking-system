@@ -3,7 +3,8 @@ const BASE_URL = 'https://gbi.nitishsingh.in/api' // production
 // central API request : all the request will be sent through this API
 
 async function request(path, options = {}) { // path will specify the url and options will specify the data to be sent to the backend
-    try {
+    try{
+
         const res = await fetch(`${BASE_URL}${path}`, {
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +22,8 @@ async function request(path, options = {}) { // path will specify the url and op
 
         return { success: res.ok, status: res.status, data }; // if everything is okay return the data to the caller method of respective page
 
-    } catch (err) {
+    }
+    catch(err){
         return { success: false, data: { message: 'error occured ' + err.message } };
     }
 }
