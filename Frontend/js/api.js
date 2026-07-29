@@ -19,6 +19,10 @@ async function request(path, options = {}) { // path will specify the url and op
             sessionStorage.clear();
             return { success: false, status: 401, data: { message: 'invalid credentials or Session has expired, login again' } };
         }
+        if (res.status === 404) {
+            sessionStorage.clear();
+            return { success: false, status: 404, data: { message: 'data not found' } };
+        }
 
         return { success: res.ok, status: res.status, data }; // if everything is okay return the data to the caller method of respective page
 
