@@ -6,6 +6,11 @@ document.getElementById('receiverEmail').addEventListener('blur',async (e)=>{
         userArea.innerHTML = '';
         return;
     }
+    if(sessionStorage.getItem('userEmail')==email){
+        userArea.style.color = 'red';
+        userArea.innerHTML = `<i class="bi bi-exclamation-circle-fill"></i> Cannot send to the same account !`;
+        return; 
+    }
 
     const user = await getUser(email);
 
