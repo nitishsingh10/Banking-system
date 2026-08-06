@@ -1,7 +1,7 @@
 const rateLimit = require('express-rate-limit');
  
 /*
-    trust proxy is already set in main.js (app.set('trust proxy', 2)), -> setting it to true  makes it vulnurable
+    trust proxy is already set in main.js (app.set('trust proxy', true)), 
     which is required for express-rate-limit to read the real client IP
     behind Render's reverse proxy instead of limiting the proxy's IP.
 */
