@@ -46,24 +46,27 @@ function showTransactionHistory(transaction) {
         
         const dateStr = new Date(tx.date).toLocaleDateString();
         
-        let cardClass, amountPrefix, counterpartyLabel, counterparty;
+        let cardClass, amountPrefix, counterpartyLabel, counterparty, counterpartyEmail;
         if(tx.type === 'credit'){
             // this entry belongs to the receiver's wallet -> other party is the sender
             cardClass = 'tx-credit';
             amountPrefix = '+';
             counterpartyLabel = 'From';
-            counterparty = tx.senderId?.name +" email: "+tx.senderId?.email || 'Unknown';
+            counterparty = tx.senderId?.name || 'Unknown';
+            counterpartyEmail = tx.senderId?.email || 'Unknown'
         } else if(tx.type === 'debit'){
             // this entry belongs to the sender's wallet -> other party is the receiver
             cardClass = 'tx-debit';
             amountPrefix = '-';
             counterpartyLabel = 'To';
-            counterparty = tx.receiverId?.name +" email: "+tx.receiverId?.email || 'Unknown';
+            counterparty = tx.receiverId?.name || 'Unknown';
+            counterpartyEmail = tx.receiverId?.email || 'Unknown'
         } else {
             cardClass = 'tx-deposit';
             amountPrefix = '+';
             counterpartyLabel = null;
             counterparty = null;
+            counterpartyEmail = null;
         }
         
         const li = document.createElement('li');
@@ -72,7 +75,7 @@ function showTransactionHistory(transaction) {
                 <div class="tx-left">
                     <span class="tx-type">${escapeHtml(tx.type)}</span>
                     <span class="tx-desc">${escapeHtml(tx.description)}</span>
-                    ${counterparty ? `<span class="tx-counterparty">${escapeHtml(counterpartyLabel)}: ${escapeHtml(counterparty)}</span>` : ''}
+                    ${counterparty ? `<span class="tx-counterparty">${escapeHtml(counterpartyLabel)}: ${escapeHtml(counterparty)} email: ${escapeHtml(counterpartyEmail)}</span>` : ''}
                 </div>
                 <div class="tx-right">
                     <span class="tx-amount">${amountPrefix}π${tx.amount}</span>
