@@ -26,7 +26,10 @@ const transactionRoute = require('./routes/transaction.routes')
 // render internally uses reverse proxy due to which we can not get the ip address directly
 // we get the renders internall proxy instead of user's ip 
 
-app.set('trust proxy', 1); // it tells the express to get the first ip that is the raw user ip instead of proxies
+// app.set('trust proxy', true); // it tells the express to get the first ip that is the raw user ip instead of proxies -> vulnurable
+
+app.set('trust proxy', 2); // it tells the express to get the third ip from the header as one is appended by vercel and one by render
+
 app.use('/api/auth',authRoute);
 app.use('/api/wallet',walletRoute);
 app.use('/api/transaction',transactionRoute);
