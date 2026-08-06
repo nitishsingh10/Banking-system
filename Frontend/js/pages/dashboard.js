@@ -75,7 +75,7 @@ function showTransactionHistory(transaction) {
                 <div class="tx-left">
                     <span class="tx-type">${escapeHtml(tx.type)}</span>
                     <span class="tx-desc">${escapeHtml(tx.description)}</span>
-                    ${counterparty ? `<span class="tx-counterparty">${escapeHtml(counterpartyLabel)}: ${escapeHtml(counterparty)} email: ${escapeHtml(counterpartyEmail)}</span>` : ''}
+                    ${counterparty ? `<span class="tx-counterparty">${escapeHtml(counterpartyLabel)}: ${escapeHtml(counterparty)} [${escapeHtml(counterpartyEmail)}]</span>` : ''}
                 </div>
                 <div class="tx-right">
                     <span class="tx-amount">${amountPrefix}π${tx.amount}</span>
