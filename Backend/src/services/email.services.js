@@ -1,6 +1,6 @@
 const sendMail = require('../config/email');
 
-const transactionMail = async ({to,subject,amount,type,time})=>{
+const transactionMail = async ({to,subject,amount,type,otherParty,time})=>{
 
     const mailOptions = {
         to: to,
@@ -12,6 +12,9 @@ const transactionMail = async ({to,subject,amount,type,time})=>{
                 <div style="font-size: 18px; margin: 20px 0; padding: 10px; background-color: #f9f9f9; border-left: 5px solid ${type === 'debit' ? '#c61616' : '#28a745'};">
                     Amount: <strong>${amount}</strong>
                 </div>
+                <div>
+                </div style="margin: 20px 0; padding: 10px; background-color: #f9f9f9; border-left: 5px solid ${type === 'debit' ? '#c61616' : '#28a745'};">
+                    ${type ==='debit'?'To: ':'From: '}${otherParty}
                 <div>
                     Time : ${time}
                 </div>

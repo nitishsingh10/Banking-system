@@ -125,6 +125,7 @@ const sendMoney = async (req, res) => {
             subject: "Money Sent",
             amount: amount,
             type: 'debit',
+            otherParty : receiverEmail,
             time: time
         });
 
@@ -133,6 +134,7 @@ const sendMoney = async (req, res) => {
             subject: "Money Received",
             amount: amount,
             type: 'credit',
+            otherParty : req.user.email,
             time: time
         });
 

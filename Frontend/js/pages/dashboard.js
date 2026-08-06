@@ -52,13 +52,13 @@ function showTransactionHistory(transaction) {
             cardClass = 'tx-credit';
             amountPrefix = '+';
             counterpartyLabel = 'From';
-            counterparty = tx.senderId?.name || tx.senderId?.email || 'Unknown';
+            counterparty = tx.senderId?.name +" email: "+tx.senderId?.email || 'Unknown';
         } else if(tx.type === 'debit'){
             // this entry belongs to the sender's wallet -> other party is the receiver
             cardClass = 'tx-debit';
             amountPrefix = '-';
             counterpartyLabel = 'To';
-            counterparty = tx.receiverId?.name || tx.receiverId?.email || 'Unknown';
+            counterparty = tx.receiverId?.name +" email: "+tx.receiverId?.email || 'Unknown';
         } else {
             cardClass = 'tx-deposit';
             amountPrefix = '+';
