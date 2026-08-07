@@ -56,6 +56,7 @@ document.getElementById('sendBtn').addEventListener('click', async () => {
         setTimeout(() => {
             sendBtn.disabled = false;
             clearInterval(tId);
+            sendBtn.textContent = `Send Funds Now`
         }, 30000);
     
         document.getElementById('receiverEmail').value = ''
