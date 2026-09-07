@@ -1,4 +1,7 @@
-const BASE_URL = 'https://gbi.nitishsingh.in/api' // production
+import {dotenv} from 'dotenv';
+dotenv.config();
+
+const BASE_URL = process.env.PRODUCTION_URL
 
 // central API request : all the request will be sent through this API
 
